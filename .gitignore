@@ -1,4 +1,8 @@
 /Debug
+Src/Backup/*
+Inc/Backup/*
+.mxproject
+
 # Prerequisites
 *.d
 
