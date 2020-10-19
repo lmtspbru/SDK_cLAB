@@ -95,7 +95,7 @@ int main(void)
   /* Do not remove this code from above */
 
   SDK_TRACE_Timestamp(PRINT, 1);
-  SDK_TRACE_Print("LEDs Blink test");
+  SDK_TRACE_Print("%s","LEDs Blink test");
   SDK_TRACE_Timestamp(PRINT, 0);
   HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
   SDK_TRACE_Timestamp(LED3, HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_15));
@@ -115,16 +115,18 @@ int main(void)
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, GPIO_PIN_RESET);
   SDK_TRACE_Timestamp(LED3, HAL_GPIO_ReadPin(GPIOD, GPIO_PIN_15));
 
+  SDK_TRACE_Timestamp(PRINT, 1);
+  SDK_TRACE_Print("%s","Test passed");
+  SDK_TRACE_Timestamp(PRINT, 0);
 
-    /* Example of sending debug messages */
-    SDK_TRACE_Timestamp(PRINT, 1);
-    SDK_TRACE_Print("Test passed");
-    SDK_TRACE_Timestamp(PRINT, 0);
+  /* Example of sending debug messages */
 
-    /* Place your code before here */
-    /* Do not remove this code below */
-    SDK_TRACE_Stop();
-    /* Do not remove this code from above */
+  SDK_TRACE_Print("%s%d%s%X", "Decimal value: ", 255, " Hex value: ", 255);
+
+  /* Place your code before here */
+  /* Do not remove this code below */
+  SDK_TRACE_Stop();
+  /* Do not remove this code from above */
 
   /* USER CODE END 2 */
 

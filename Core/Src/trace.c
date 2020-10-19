@@ -1,4 +1,6 @@
 #include "trace.h"
+#include <stdio.h>
+#include <stdarg.h>
 
 traceinfo_t * TI = (traceinfo_t *)TRACEINFO_ADDR;
 tracelog_t * TL = (tracelog_t *)TRACELOG_ADDR;
@@ -6,7 +8,7 @@ uint32_t * CRC32 = (uint32_t *)TRACECRC_ADDR;
 uint32_t Print_Write_Address = PRINTDATA_ADDR;
 uint32_t Dump_Write_Address = DUMPBUF_ADDR;
 uint8_t eventId = 0x00;
-
+char __buf[256];
 
 /**
  * ----------------------------------------------------------------------
@@ -62,13 +64,18 @@ void SDK_TRACE_Timestamp(uint8_t id, uint8_t value)
 }
 /**
  * ----------------------------------------------------------------------
- * Function for writing a message to the trace buffer
- * @param data Pointer to array of chars
+ * Writes the C string pointed by format to the trace buffer
  *-----------------------------------------------------------------------
  */
-void SDK_TRACE_Print(const char * data)
+void SDK_TRACE_Print(char * format, ...)
 {
-	uint8_t len = strlen(data);
+
+	va_list args;
+	va_start(args, format);
+
+	vsprintf( __buf, format, args);
+
+	uint8_t len = strlen(__buf);
 
 	*(__IO uint32_t *)(Print_Write_Address+TI->printlog_size) = GetCC() / (HAL_RCC_GetHCLKFreq() / CLK_Prescaler);
 	TI->printlog_size+=4;
@@ -78,7 +85,7 @@ void SDK_TRACE_Print(const char * data)
 
 	for (int i = 0; i < len; i++)
 	{
-		*(__IO uint8_t *)(Print_Write_Address+TI->printlog_size) = data[i];
+		*(__IO uint8_t *)(Print_Write_Address+TI->printlog_size) = __buf[i];
 		TI->printlog_size++;
 	}
 }

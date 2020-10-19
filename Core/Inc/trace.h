@@ -64,7 +64,7 @@ void MX_TRACE_Init(void);
 void SDK_TRACE_Start(void);
 void SDK_TRACE_Stop(void);
 void SDK_TRACE_Timestamp(uint8_t id, uint8_t value);
-void SDK_TRACE_Print(const char * data);
+void SDK_TRACE_Print(char * format, ...);
 void SDK_TRACE_Dump(const char * data, uint16_t size);
 
 #endif /* INC_TRACE_H_ */
