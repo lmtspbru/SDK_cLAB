@@ -123,6 +123,11 @@ int main(void)
 
   SDK_TRACE_Print("%s%d%s%X", "Decimal value: ", 255, " Hex value: ", 255);
 
+  /* Example of writing dump */
+
+  uint8_t data[4] = { 0xDE, 0xAD, 0xBE, 0xEF };
+  SDK_TRACE_Dump(&data, 4);
+
   /* Place your code before here */
   /* Do not remove this code below */
   SDK_TRACE_Stop();

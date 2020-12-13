@@ -92,22 +92,22 @@ void SDK_TRACE_Print(char * format, ...)
 /**
  * ----------------------------------------------------------------------
  * Function for writing data to the trace buffer
- * @param data Pointer to data
+ * @param addr Address of data
  * @param size Size of data
  *-----------------------------------------------------------------------
  */
-void SDK_TRACE_Dump(const char * data, uint16_t size)
+void SDK_TRACE_Dump(uint32_t addr, uint16_t size)
 {
 
 	*(__IO uint32_t *)(Dump_Write_Address+TI->dumpbuf_size) = GetCC() / (HAL_RCC_GetHCLKFreq() / CLK_Prescaler);
 	TI->dumpbuf_size+=4;
 
 	*(__IO uint16_t *)(Dump_Write_Address+TI->dumpbuf_size) = size;
-	TI->dumpbuf_size++;
+	TI->dumpbuf_size+=2;
 
 	for (int i = 0; i < size; i++)
 	{
-		*(__IO uint8_t *)(Dump_Write_Address+TI->dumpbuf_size) = data[i];
+		*(__IO uint8_t *)(Dump_Write_Address+TI->dumpbuf_size) = *(__IO uint8_t*)(addr + i);
 		TI->dumpbuf_size++;
 	}
 }
