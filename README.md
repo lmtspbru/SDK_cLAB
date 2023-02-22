@@ -28,6 +28,8 @@
     }
     ```
 3. В настройках компоновщика (File -> Properties -> C/C++ Build -> Settings -> Tool Settings -> MCU GCC Linker -> General) выбран правильный Linker Script (STM32F407VGTX_RAM.ld).
+### Настройка сборки проекта
+Для того, чтобы после сборки проекта получить .bin файл, необходимо в настройках (File -> Properties -> C/C++ Build -> Settings -> Tool Settings -> MCU Post build outputs) установить галочку "Convert to binary file (-O binary)"
 ### Описание функций
 Для использования трассировочного буфера в файле ***main.c*** подключен заголовочный файл ***trace.h***, содержащий следующие функции:
  - ``` MX_TRACE_Init(); ```<br>
